@@ -737,11 +737,11 @@ end
 #
 When(/^I wait until I see "([^"]*)" modal$/) do |title|
   path = "//*[contains(@class, \"modal-title\") and text() = \"#{title}\"]" \
-    '/ancestor::div[contains(@class, "modal-dialog")]'
+    '/ancestor::div[contains(@class, "modal") and contains(@class, "in")]'
   begin
     Timeout.timeout(DEFAULT_TIMEOUT) do
       loop do
-        break if page.has_xpath?(path, visible: true)
+        break if page.has_xpath?(path)
         sleep 3
       end
     end
